@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkWindow" id="MainWindow">
+    <property name="width_request">500</property>
+    <property name="height_request">400</property>
+    <property name="title" translatable="yes">Apache Web Developers Controller</property>
+    <child>
+      <object class="GtkVBox" id="MainVBox">
+        <property name="visible">True</property>
+        <property name="spacing">5</property>
+        <child>
+          <object class="GtkHBox" id="ApacheControls">
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkLabel" id="ApacheStatus">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Apache is running</property>
+              </object>
+              <packing>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="ApacheStatusButton">
+                <property name="label" translatable="yes">Start</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="changeApacheStatus"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="ApacheAutostart">
+                <property name="label" translatable="yes">Start on boot?</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="draw_indicator">True</property>
+              </object>
+              <packing>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHBox" id="HostHBox">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkTreeView" id="HostList">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </object>
+              <packing>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkVBox" id="ControlVBox">
+                <property name="width_request">40</property>
+                <property name="visible">True</property>
+                <child>
+                  <object class="GtkButton" id="AddNewHost">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <child>
+                      <object class="GtkImage" id="AddButtonImage">
+                        <property name="visible">True</property>
+                        <property name="stock">gtk-add</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="RemoveButton">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <child>
+                      <object class="GtkImage" id="image1">
+                        <property name="visible">True</property>
+                        <property name="stock">gtk-remove</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLinkButton" id="AuthorLink">
+            <property name="label" translatable="yes">@kennydude</property>
+            <property name="height_request">29</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="relief">none</property>
+            <property name="uri">http://twitter.com/kennydude</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
