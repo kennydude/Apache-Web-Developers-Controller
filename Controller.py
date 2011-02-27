@@ -5,8 +5,15 @@ Written by @kennydude
 Written for Ubuntu 10.10
 (probably won't work at all on anything else!)
 '''
+print "Welcome to Apache Wed Developer Controller"
+print "Created by @kennydude"
+print "------------"
+print "MUST BE RAN AS ROOT ON UBUNTU!"
+print "pygtk is required"
+print "------------"
+print ""
 # import stuff!
-import sys, os, fnmatch, time
+import sys, os, fnmatch, time, re
 import subprocess
 try:
  	import pygtk
@@ -103,8 +110,46 @@ class ControllerWindow:
 		else:
 			self.call('update-rc.d apache2 defaults')
 		self.refresh()
+	def readHosts(self):
+		hfile = open('/etc/hosts', 'r')
+		h = hfile.readlines()
+		hfile.close()
+		return h
 	def addNewHost(self, x):
-		print self.inputBox("New host", "Enter the address you wish Apache to handle on this computer", "Host: ")
+		i = self.inputBox("New host", "Enter the address you wish Apache to handle on this computer", "Host: ")
+		if not re.match("^[.A-Za-z]+$", i):
+			print "Host invalid"
+			return
+		# write hosts
+		h = self.readHosts()
+		hfile = open('/etc/hosts', 'w')
+		for line in h:
+			hfile.write(line)
+		hfile.write('\n#AWDC-kennydude AUTOGEN\n')
+		hfile.write('127.0.0.1\t%s\n' % i)
+		hfile.close()
+		self.refresh()
+	def removeHost(self, x):
+		host_list = self.wTree.get_object("HostList")
+		(tm, ti) = host_list.get_selection().get_selected()
+		host_to_delete = tm[ti][0]
+		h = self.readHosts()
+		i = 0
+		for line in h:
+			if line[0] == "#" or line == "\n" or line == "":
+				pass
+			try:
+				if line.split('\n')[0].split('\t')[1] == host_to_delete:
+					del h[i]
+					del h[i-1]
+			except Exception:
+				pass
+			i+=1
+		hfile = open('/etc/hosts', 'w')
+		for line in h:
+			hfile.write(line)
+		hfile.close()
+		self.refresh()
 	def __init__(self):
 		self.gladefile = "Window.ui"  
 	        self.wTree = gtk.Builder()
@@ -124,6 +169,8 @@ class ControllerWindow:
 			host_list.set_model(self.hostList)
 			add_button = self.wTree.get_object("AddNewHost")
 			add_button.connect("clicked", self.addNewHost)
+			remove_button = self.wTree.get_object("RemoveHost")
+			remove_button.connect("clicked", self.removeHost)
 			self.window.connect("destroy", gtk.main_quit)
 		self.window.show()
 		self.refresh()

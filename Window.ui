@@ -6,6 +6,8 @@
     <property name="width_request">500</property>
     <property name="height_request">400</property>
     <property name="title" translatable="yes">Apache Web Developers Controller</property>
+    <property name="window_position">center</property>
+    <property name="icon_name">applications-development</property>
     <child>
       <object class="GtkVBox" id="MainVBox">
         <property name="visible">True</property>
@@ -90,7 +92,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="RemoveButton">
+                  <object class="GtkButton" id="RemoveHost">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
